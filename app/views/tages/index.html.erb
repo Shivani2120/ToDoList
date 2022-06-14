@@ -1,0 +1,36 @@
+<h2> Tag</h2>
+
+<%= link_to 'New Tag', new_tage_path %>
+<br>
+<br>
+
+<% @tages.each do |tag| %>
+   <div style="border: 1px solid black; background-color: #add8e6;" >
+
+       <h3><%= tag.content %></h3>
+       <%= time_ago_in_words(tag.created_at) %> ago by <%= tag.user.email %>
+       <br>
+       
+
+       <% if tag.add_tages.any? %>
+         
+         <h4>Add Tages<h4>
+
+         <%= render tag.add_tages %>
+
+      <% end %>
+
+      <hr>
+      <p>Add tag</p>
+      <%= form_for([tag, tag.add_tages.build]) do |f| %>
+         <%= f.text_area :content %>
+         <%= submit_tag "Add" %>
+
+      <% end %>
+
+      </div>
+
+      <br>
+      <br>
+
+      <% end %>   
